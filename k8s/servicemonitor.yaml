@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: gitops-app
+spec:
+  selector:
+    matchLabels:
+      app: gitops-app
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
