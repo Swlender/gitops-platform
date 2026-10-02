@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
         - name: gitops-app
-          image: gitops-app:v1
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/swlender/gitops-app:d358f28eb3701856eaade8d3ff527b707dfcb318
           ports:
             - containerPort: 8000
           readinessProbe:
