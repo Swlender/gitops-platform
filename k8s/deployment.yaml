@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gitops-app
+  template:
+    metadata:
+      labels:
+        app: gitops-app
+    spec:
+      containers:
+        - name: gitops-app
+          image: gitops-app:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
