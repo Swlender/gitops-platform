@@ -42,38 +42,38 @@ flowchart LR
 ### CI security gate: Trivy blocks a vulnerable image
 The first scan found a HIGH-severity CVE in a Debian base-image package (`libpcre2`). The pipeline failed and nothing was pushed. After adding `apt-get upgrade` to the Dockerfile, the scan came back clean and the image was published.
 
-![Trivy blocked the build](docs/screenshots/01-trivy-blocked.png)
-![Pipeline green after the fix](docs/screenshots/02-pipeline-green.png)
-![Image published to GHCR](docs/screenshots/03-ghcr-image.png)
+![Trivy blocked the build](docs/screenshots/1. Trivy blocked.png)
+![Pipeline green after the fix](docs/screenshots/2. Pipeline all green.png)
+![Image published to GHCR](docs/screenshots/3. GHCR image.png)
 
 ### Kubernetes: 2 replicas and automatic pod recovery
 Deleting a pod makes the Deployment create a replacement within seconds.
 
-![Pods running](docs/screenshots/04-pods-running.png)
-![Pod self-heal](docs/screenshots/05-pod-self-heal.png)
+![Pods running](docs/screenshots/4. pods running.png)
+![Pod self-heal](docs/screenshots/5. pods self heal.png)
 
 ### GitOps with Argo CD
 Argo CD shows the app as Synced and Healthy.
 
-![Argo CD synced](docs/screenshots/06-argocd-synced.png)
+![Argo CD synced](docs/screenshots/6. argocd syned.png)
 
 **Git is the source of truth:** changing `replicas` from 2 to 4 in `deployment.yaml` and pushing scaled the app with no `kubectl` commands.
 
-![Scale via Git](docs/screenshots/07-scale-via-git.png)
+![Scale via Git](docs/screenshots/7. scale thro git.png)
 
 **Drift correction:** a manual `kubectl scale --replicas=5` was reverted by Argo CD automatically.
 
-![Argo CD self-heal](docs/screenshots/08-argocd-self-heal.png)
+![Argo CD self-heal](docs/screenshots/8. argocd self heal.png)
 
 ### Monitoring and alerting
 Prometheus scrapes the app, and Grafana shows the request rate from the custom metric.
 
-![Prometheus target](docs/screenshots/09-prometheus-target.png)
-![Grafana dashboard](docs/screenshots/10-grafana-dashboard.png)
+![Prometheus target](docs/screenshots/9. target prometheus.png)
+![Grafana dashboard](docs/screenshots/10. Grafana dashboard.png)
 
 Scaling the app to 0 replicas (with Argo auto-sync paused) triggered the `GitopsAppLowReplicas` alert.
 
-![Alert firing](docs/screenshots/11-alert-firing.png)
+![Alert firing](docs/screenshots/11. alert firing.png)
 
 ## Repository layout
 
